@@ -9,7 +9,7 @@
         $L_type_id=$row["L_type_id"];  
         if($L_type_id==1){
             ?>
-            <?php
+<?php
             if(isset($_POST['submit'])){
               $fname=$_POST['fname']; 
               $lname=$_POST['lname'];
@@ -18,6 +18,7 @@
               $so=$_POST['so'];
               $po=$_POST['po'];
               $housename=$_POST['housename'];
+              $level=$_POST['level'];
               $city=$_POST['city'];
               $street=$_POST['street'];
               $dob=$_POST['dob'];
@@ -34,17 +35,6 @@
               $row=$result->fetch_assoc();
               $L_type_id=$row['type_id'];
 
-              $sql="INSERT INTO tbl_login (L_uname,L_pass,L_type_id) VALUES ('$email','$password','$L_type_id');";
-              $conn->query($sql);
-
-              $sql="SELECT L_id FROM tbl_login WHERE L_uname='$email' AND L_type_id='$L_type_id';";
-              $res=$conn->query($sql);
-              $userdata=$res->fetch_assoc();
-              $E_L_id=$userdata['L_id'];
-
-              $sql="INSERT INTO tbl_employees(E_fname,E_lname,E_phne,E_email,E_so,E_postal,E_house,E_street,E_city,E_dob,E_district,E_L_id)VALUES('$fname','$lname','$ph','$email','$so','$po','$housename','$city','$street','$dob','$district',$E_L_id);";
-              if($conn->query($sql)===TRUE){
-                
                 require 'vendor/autoload.php';
                
                 $mail = new PHPMailer\PHPMailer\PHPMailer();
@@ -65,58 +55,99 @@
                 
                 if (!$mail->send()) {
                     ?>
-                      <!DOCTYPE html>
-                      <html lang="en">
-                      <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Document</title>
-                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-                      </head>
-                      <body>
-                        
-                      </body>
-                      <script>
-                         Swal.fire({
-  icon: "error",
-  title: "Invalid Email...!",
-  text: "Something went wrong!",
-});
-                      </script>
-                      </html>
-                    <?php
-                } else {
-                   
-                }
-
-                ?>
-                  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
+
+<body>
+
+</body>
+<script>
+  Swal.fire({
+    icon: "error",
+    title: "Invalid Email...!",
+    text: "Something went wrong!",
+  });
+</script>
+
+</html>
+<?php
+                } else {
+                  $sql="INSERT INTO tbl_login (L_uname,L_pass,L_type_id) VALUES ('$email','$password','$L_type_id');";
+                  $conn->query($sql);
+                  $sql="SELECT L_id FROM tbl_login WHERE L_uname='$email' AND L_type_id='$L_type_id';";
+                  $res=$conn->query($sql);
+                  $userdata=$res->fetch_assoc();
+                  $E_L_id=$userdata['L_id'];
+                  $sql="INSERT INTO tbl_employees(E_fname,E_lname,E_phne,E_email,E_so,E_postal,E_house,E_level,E_street,E_city,E_dob,E_district,E_L_id)VALUES('$fname','$lname','$ph','$email','$so','$po','$housename','$level','$city','$street','$dob','$district',$E_L_id);";
+                  if($conn->query($sql)===TRUE){
+                      ?>
+                        <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+  Swal.fire({
+    icon: "success",
+    title: "Employee added...",
+    text: "Successfully..",
+  });
+</script>
+
+</html>
+                      <?php
+                  }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+
 <body>
 
 </body>
 
 <script>
-Swal.fire({
-icon: "success",
-title: "Employee added successfully..",
-showConfirmButton: false,
-timer: 2000
-});
+  Swal.fire({
+    icon: "success",
+    title: "Employee added successfully..",
+    showConfirmButton: false,
+    timer: 2000
+  });
 
 </script>
 
 </html>
-                <?php
-             }
+<?php
+                }
+
+                ?>
+
+<?php
             }
             ?>
 <!DOCTYPE html>
@@ -182,14 +213,14 @@ timer: 2000
           </a>
         </li>
         <li class="nav-item">
-                    <a class="nav-link " href="allocate_employee.php">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Allocate Employee</span>
-                    </a>
-                </li>
+          <a class="nav-link " href="allocate_employee.php">
+            <div
+              class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Allocate Employee</span>
+          </a>
+        </li>
       </ul>
     </div>
   </aside>
@@ -260,13 +291,14 @@ timer: 2000
                           <input type="text" class="form-control" id="ph" name="ph" onblur="validatePhoneNumber1()"
                             oninput="validatePhoneNumber()" onkeyup="validatePhoneNumber1()">
                           <label class="error" id="erph"></label>
-                          <label class="error" id="errorMessageph" style="font-size: small; color: red;"></label>                          
+                          <label class="error" id="errorMessageph" style="font-size: small; color: red;"></label>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group first">
                           <label>Email</label>
-                          <input type="email" class="form-control" id="email" name="email" onblur="validateEmail1()" oninput="validateEmail()" onkeyup="validateEmail1()">
+                          <input type="email" class="form-control" id="email" name="email" onblur="validateEmail1()"
+                            oninput="validateEmail()" onkeyup="validateEmail1()">
                           <label class="error" id="eremail"></label>
                           <label class="error" id="errorMessage" style="font-size: small; color: red;"></label>
                         </div>
@@ -290,8 +322,9 @@ timer: 2000
                         </div>
                       </div>
                     </div>
+
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group first">
                           <label>House Name</label>
                           <input type="text" class="form-control" id="housename" name="housename"
@@ -299,11 +332,21 @@ timer: 2000
                           <label class="error" id="erhousename"></label>
                         </div>
                       </div>
+                      <div class="col-md-6">
+                        <div class="form-group last mb-3">
+                          <label>Level</label>
+                          <select class="form-select" aria-label="Default select example" id="level" name="level" onblur="validateLevel()" oninput="validateLevel()">
+                            <option value="null" selected>Choose</option>
+                            <option value="manager">Manager</option>
+                            <option value="meter reader">Meter Reader</option>
+                          </select>
+                          <label class="error" id="erlevel"></label>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="row">
                       <div class="col-md-6">
-
                         <div class="form-group last mb-3">
                           <label>Street name</label>
                           <input type="text" class="form-control" id="street" name="street"
@@ -312,7 +355,6 @@ timer: 2000
                         </div>
                       </div>
                       <div class="col-md-6">
-
                         <div class="form-group last mb-3">
                           <label>City</label>
                           <input type="text" class="form-control" id="city" name="city" onblur="validateCity()"
@@ -332,7 +374,8 @@ timer: 2000
                           ?>
 
                           <input type="date" class="form-control" id="dob" name="dob"
-                            min="<?php echo $fiftyYearsAgo; ?>" max="<?php echo $eighteenYearsAgo; ?>" onkeydown="return false" onpaste="return false">
+                            min="<?php echo $fiftyYearsAgo; ?>" max="<?php echo $eighteenYearsAgo; ?>"
+                            onkeydown="return false" onpaste="return false">
 
                           <label class="error" id="erdob"></label>
                         </div>
@@ -573,6 +616,21 @@ timer: 2000
         }
       }
 
+      function validateLevel() {
+    var level = document.getElementById('level');
+    var erLevel = document.getElementById('erlevel');
+
+    // Check if an option other than "Choose" is selected
+    if (level.value === "null") {
+        erLevel.innerText = 'Please select a level';
+        return false;
+    } else {
+        erLevel.innerText = '';
+        return true;
+    }
+}
+
+
       function validatePostalCode() {
         var postalCode = document.getElementById('po').value;
         var erPostalCode = document.getElementById('erpo');
@@ -607,24 +665,24 @@ timer: 2000
       }
 
       function validateCity() {
-  var city = document.getElementById('city').value;
-  var erCity = document.getElementById('ercity');
+        var city = document.getElementById('city').value;
+        var erCity = document.getElementById('ercity');
 
-  // Regular expression to validate city name format
-  var regex = /^[a-zA-Z]{3,}(?:(\w)(?!\1))+$/;
+        // Regular expression to validate city name format
+        var regex = /^[a-zA-Z]{3,}(?:(\w)(?!\1))+$/;
 
-  // Check if the city name matches the pattern
-  if (regex.test(city)  && !isAllLettersSame(city)) {
-    erCity.innerText = ''; // Clear error message
-    return true; // Valid city name
-  } else {
-    erCity.innerText = 'City name should start with a letter and have at least three letters, and not contain consecutive identical letters.';
-    return false; // Invalid city name
-  }
-}
-function isAllLettersSame(str) {
-  return /^([a-zA-Z])\1+$/.test(str);
-}
+        // Check if the city name matches the pattern
+        if (regex.test(city) && !isAllLettersSame(city)) {
+          erCity.innerText = ''; // Clear error message
+          return true; // Valid city name
+        } else {
+          erCity.innerText = 'City name should start with a letter and have at least three letters, and not contain consecutive identical letters.';
+          return false; // Invalid city name
+        }
+      }
+      function isAllLettersSame(str) {
+        return /^([a-zA-Z])\1+$/.test(str);
+      }
 
 
       function validateDistrict() {
@@ -696,21 +754,21 @@ function isAllLettersSame(str) {
 
         // Check if house name is empty
         if (houseNameInput === "") {
-            errorMessageElement.textContent = "Please enter a house name.";
-            return false;
+          errorMessageElement.textContent = "Please enter a house name.";
+          return false;
         }
 
         // Check if house name contains only letters, numbers, and spaces
         var alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
         if (!alphanumericRegex.test(houseNameInput)) {
-            errorMessageElement.textContent = "House name can only contain letters, numbers, and spaces.";
-            return false;
+          errorMessageElement.textContent = "House name can only contain letters, numbers, and spaces.";
+          return false;
         }
 
         // Clear error message if validation passes
         errorMessageElement.textContent = "";
         return true;
-    }
+      }
 
 
       document.getElementById('ph').addEventListener('blur', validatePhoneNumber);
@@ -735,6 +793,8 @@ function isAllLettersSame(str) {
       document.getElementById('housename').addEventListener('input', validateHouseName);
       document.getElementById('email').addEventListener('blur', validateEmail1);
       document.getElementById('email').addEventListener('onkeyup', validateEmail1);
+      document.getElementById('level').addEventListener('blur', validateLevel);
+      document.getElementById('level').addEventListener('onkeyup', validateLevel);
 
       function validateForm() {
         // Call all individual validation functions
@@ -749,6 +809,7 @@ function isAllLettersSame(str) {
         validateFirstName();
         validateSonOf();
         validateHouseName();
+        validateLevel();
 
 
         // Check if any error message is displayed
@@ -762,41 +823,41 @@ function isAllLettersSame(str) {
         return true; // All fields are valid, allow form submission
       }
 
-    function validateEmail1() {
-    var email = document.getElementById('email').value;
-    var errorMessage = document.getElementById('errorMessage');
-    var xhr = new XMLHttpRequest();
+      function validateEmail1() {
+        var email = document.getElementById('email').value;
+        var errorMessage = document.getElementById('errorMessage');
+        var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
             var response = xhr.responseText;
             errorMessage.innerHTML = response;
-        }
-    };
+          }
+        };
 
-    xhr.open('GET', 'employee_email.php?email=' + email, true);
-    xhr.send();
-}
+        xhr.open('GET', 'employee_email.php?email=' + email, true);
+        xhr.send();
+      }
 
-function validatePhoneNumber1() {
-    var ph = document.getElementById('ph').value;
-    var errorMessageph = document.getElementById('errorMessageph');
-    var xhr = new XMLHttpRequest();
+      function validatePhoneNumber1() {
+        var ph = document.getElementById('ph').value;
+        var errorMessageph = document.getElementById('errorMessageph');
+        var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
             var response = xhr.responseText;
             errorMessageph.innerHTML = response;
-        }
-    };
+          }
+        };
 
-    xhr.open('GET', 'employee_phne.php?ph=' + ph, true);
-    xhr.send();
-}
+        xhr.open('GET', 'employee_phne.php?ph=' + ph, true);
+        xhr.send();
+      }
 
-function clearEmailError() {
-    document.getElementById('errorMessage').innerHTML = "";
-}
+      function clearEmailError() {
+        document.getElementById('errorMessage').innerHTML = "";
+      }
 
     </script>
 </body>

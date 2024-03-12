@@ -186,7 +186,7 @@
                                                                 <select class="form-control" id="manager" name="manager" oninput="validateEmp()">
                                                                             <option value="0" selected>Choose</option>
                                                                     <?php
-                                                                    $sql1="SELECT E_id,E_fname,E_lname FROM tbl_employees WHERE E_status = 1 AND E_id NOT IN ( SELECT Alloc_manager FROM tbl_allocate UNION SELECT Alloc_meter FROM tbl_allocate );";
+                                                                    $sql1="SELECT E_id,E_fname,E_lname FROM tbl_employees WHERE E_status = 1 AND E_level='manager' AND E_id NOT IN ( SELECT Alloc_manager FROM tbl_allocate UNION SELECT Alloc_meter FROM tbl_allocate );";
                                                                     $result1=$conn->query($sql1);
                                                                     if($result1->num_rows>0){
                                                                         while( $row1 = $result1->fetch_assoc() ) {
@@ -209,7 +209,7 @@
                                                                 <select class="form-control" id="meter" name="meter" oninput="validateEmp()">
                                                                     <option value="0" selected>Choose</option>
                                                                     <?php
-                                                                    $sql1="SELECT E_id,E_fname,E_lname FROM tbl_employees WHERE E_status = 1 AND E_id NOT IN ( SELECT Alloc_manager FROM tbl_allocate UNION SELECT Alloc_meter FROM tbl_allocate );";
+                                                                    $sql1="SELECT E_id,E_fname,E_lname FROM tbl_employees WHERE E_status = 1 AND E_level='meter reader' AND E_id NOT IN ( SELECT Alloc_manager FROM tbl_allocate UNION SELECT Alloc_meter FROM tbl_allocate );";
                                                                     $result1=$conn->query($sql1);
                                                                     if($result1->num_rows>0){
                                                                         while( $row1 = $result1->fetch_assoc() ) {

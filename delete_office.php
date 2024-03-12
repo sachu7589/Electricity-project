@@ -2,6 +2,8 @@
     require_once "connect.php";
     if(isset($_GET['O_id'])){
         $O_id=$_GET['O_id'];
+        $s1="UPDATE tbl_allocate SET Alloc_manager=0, Alloc_meter=0 WHERE Alloc_officeid=$O_id;";
+        $conn->query($s1);
         $sql="UPDATE tbl_offices SET O_status=0 WHERE O_id=$O_id;";
         if($conn->query($sql)){
             ?>
