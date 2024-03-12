@@ -34,7 +34,10 @@
 window.onpopstate = function() {
     window.history.pushState(null, null, window.location.href);
 };
-
+if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+            // Redirect the user to the login page if accessed through history
+            window.location.href = "logout.php";
+        }
     </script>
 </head>
 

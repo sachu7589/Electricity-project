@@ -120,26 +120,28 @@
                     <div class="col-12">
                         <div class="card mb-4">
                         <div class="card-header pb-0 mx-auto">
-                                <h6> Employees</h6>
+                                <h4> Employees</h4>
                             </div>
                             <div class="card-body px-0 pt-0 pb-2">
                                 <div class="table-responsive p-0">
                                     <table class="table align-items-center mb-0">
                                         <thead>
                                         <tr>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
+                                                    Level</th>
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
                                                     Name</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
                                                     Phone</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
                                                     Email</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
                                                     Address</th>
-                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                    <th class="text-uppercase text-secondary font-weight-bolder">
                                                     S/O</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
                                                     DOB</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary font-weight-bolder">
                                                     Edit/Delete</th>
                                             </tr>
                                         </thead>
@@ -151,42 +153,48 @@
                                                 while($rows=$result->fetch_assoc()){
                                                     ?>
                                             <tr>
+                                            <td>
+                                                    <h6 class="mb-0 text-">
+                                                        <?php echo $rows['E_level']; ?>
+                                                    </h6>
+                                                </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                     <?php echo $rows['E_fname'] . ' ' . $rows['E_lname']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['E_phne']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['E_email']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                     House :  <?php echo $rows['E_house']; ?> <br>
                                                        Street :  <?php echo $rows['E_street']; ?> <br>
                                                         City : <?php echo $rows['E_city']; ?> <br>
-                                                        Postal : <?php echo $rows['E_postal']; ?>
+                                                        Postal : <?php echo $rows['E_postal']; ?> <br>
+                                                        District : <?php echo $rows['E_district']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['E_so']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
-                                                        <?php echo $rows['E_district']; ?>
+                                                    <h6 class="mb-0 text-">
+                                                        <?php echo $rows['E_dob']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
-                                                        <a href="edit_employee.php?E_id=<?=$rows['E_id']?>" class="btn-primary">
+                                                    <h6 class="mb-0 text-">
+                                                        <a href="edit_employee.php?E_id=<?=$rows['E_id']?>">
                                                             <button class="btn btn-primary btn-sm">Edit</button>
                                                         </a> <br>
                                                         <a href="delete_employee.php?E_id=<?=$rows['E_id']?>">

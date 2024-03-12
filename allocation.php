@@ -15,7 +15,30 @@
                 $meter=$_POST['meter'];
                 $O_id=$_GET['O_id'];
                 $sql="UPDATE tbl_allocate SET Alloc_manager=$manager, Alloc_meter=$meter WHERE  Alloc_officeid=$O_id;"; 
-                $conn->query($sql);
+                if($conn->query($sql)===TRUE){
+                    ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<body>
+    
+</body>
+<script>
+    Swal.fire({
+  icon: "success",
+  title: "Allocated successfully..",
+  showConfirmButton: false,
+  timer: 1500
+});
+</script>
+</html>
+                    <?php
+                }
             }
             ?>
 <!DOCTYPE html>

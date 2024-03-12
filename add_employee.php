@@ -825,6 +825,7 @@
 
       function validateEmail1() {
         var email = document.getElementById('email').value;
+        var userType=3;
         var errorMessage = document.getElementById('errorMessage');
         var xhr = new XMLHttpRequest();
 
@@ -834,8 +835,7 @@
             errorMessage.innerHTML = response;
           }
         };
-
-        xhr.open('GET', 'employee_email.php?email=' + email, true);
+        xhr.open('GET', 'validate_email.php?email=' + email + '&userType=' + userType, true);
         xhr.send();
       }
 

@@ -28,6 +28,7 @@
         $street=$row['E_street'];
         $dob=$row['E_dob'];
         $district=$row['E_district'];
+        $level=$row['E_level'];
     }else{
       header("location: manage_office.php");
     }
@@ -43,8 +44,9 @@
         $street=$_POST['street'];
         $dob=$_POST['dob'];
         $district=$_POST['district'];
+        $level=$_POST['level'];
         require_once "connect.php";
-        $sql="UPDATE tbl_employees SET E_fname='$fname',E_lname='$lname', E_phne=$ph, E_email='$email', E_so='$so', E_postal='$po', E_house='$housename', E_street='$street', E_city='$city',E_dob='$dob',E_district='$district' WHERE E_id=$E_id;";
+        $sql="UPDATE tbl_employees SET E_fname='$fname',E_lname='$lname', E_phne=$ph, E_email='$email', E_so='$so', E_postal='$po', E_house='$housename',E_level='$level', E_street='$street', E_city='$city',E_dob='$dob',E_district='$district' WHERE E_id=$E_id;";
         if($conn->query($sql)===TRUE){
            ?>
             <!DOCTYPE html>
@@ -223,8 +225,8 @@ setTimeout(function() {
                       <div class="col-md-6">
                         <div class="form-group first">
                           <label>Email</label>
-                          <input type="email" class="form-control" id="email" name="email" onblur="validateEmail()"
-                            oninput="validateEmail()" value="<?php echo $email; ?>">
+                          <input type="email" class="form-control" id="email" name="email" onblur="validateEmail1()"
+                            oninput="validateEmail()" onkeyup="validateEmail1()" value="<?php echo $email; ?>">
                           <label class="error" id="eremail"></label>
                           <label class="err" id="errorMessage" style="font-size: small; color: red;"></label>
                         </div>
@@ -249,12 +251,23 @@ setTimeout(function() {
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group first">
                           <label>House Name</label>
                           <input type="text" class="form-control" id="housename" name="housename"
                             onblur="validateHouseName()" oninput="validateHouseName()" value="<?php echo $housename; ?>">
                           <label class="error" id="erhousename"></label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group last mb-3">
+                          <label>Level</label>
+                          <select class="form-select" aria-label="Default select example" id="level" name="level" onblur="validateLevel()" oninput="validateLevel()">
+                            <option value="<?php echo $level; ?>"> <?php echo $level; ?> </option>
+                            <option value="manager">Manager</option>
+                            <option value="meter reader">Meter Reader</option>
+                          </select>
+                          <label class="error" id="erlevel"></label>
                         </div>
                       </div>
                     </div>
@@ -715,7 +728,7 @@ function isAllLettersSame(str) {
         }
         return true; // All fields are valid, allow form submission
       }
-      function validateEmail() {
+      function validateEmail1() {
     var email = document.getElementById('email').value;
     var errorMessage = document.getElementById('eremail');
     var xhr = new XMLHttpRequest();
@@ -726,7 +739,7 @@ function isAllLettersSame(str) {
             errorMessage.innerHTML = response;
         }
     };
-
+     
     xhr.open('GET', 'check_email.php?email=' + email, true);
     xhr.send();
 }

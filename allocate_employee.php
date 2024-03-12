@@ -113,24 +113,24 @@
                 <div class="col-12">
                     <div class="card mb-4">
                     <div class="card-header pb-0 mx-auto">
-                            <h6> Allocation</h6>
+                            <h4> Allocation</h4>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                     <tr>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                            <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                 Office ID</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                            <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                 Area</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                            <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                 Address</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     Manager</th>
-                                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                    <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                         Meter Reader</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                            <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                 Allocation</th>
                                         </tr>
                                     </thead>
@@ -143,17 +143,17 @@
                                                     ?>
                                             <tr>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_id']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_area']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                        Street :  <?php echo $rows['O_street']; ?> <br>
                                                         City : <?php echo $rows['O_city']; ?> <br>
                                                         Postal : <?php echo $rows['O_postal']; ?> <br>
@@ -162,7 +162,7 @@
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php 
                                                         if($rows['Alloc_manager']==0){
                                                             echo "Not  Assigned";
@@ -182,7 +182,7 @@
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                     <?php 
                                                     if($rows['Alloc_meter']==0){
                                                         echo "Not  Assigned";
@@ -202,7 +202,7 @@
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <a href="allocation.php?O_id=<?=$rows['Alloc_officeid']?>" class="btn btn-primary btn-sm">
                                                             Allocate
                                                         </a> 

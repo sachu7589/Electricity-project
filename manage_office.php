@@ -120,26 +120,26 @@
                     <div class="col-12">    
                         <div class="card mb-4">
                             <div class="card-header pb-0 mx-auto">
-                                <h6> Offices</h6>
+                                <h4> Offices</h4>
                             </div>
                             <div class="card-body px-0 pt-0 pb-2">
                                 <div class="table-responsive p-0">
                                     <table class="table align-items-center mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     Phone</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     email</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     area</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     Address</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     landmark</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     district</th>
-                                                <th class="text-uppercase text-secondary text-xs font-weight-bolder">
+                                                <th class="text-uppercase text-secondary text- font-weight-bolder">
                                                     Edit/Delete</th>
                                             </tr>
                                         </thead>
@@ -152,40 +152,40 @@
                                                     ?>
                                             <tr>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_phone']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_email']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_area']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                        Street :  <?php echo $rows['O_street']; ?> <br>
                                                         City : <?php echo $rows['O_city']; ?> <br>
                                                         Postal : <?php echo $rows['O_postal']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_landmark']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
+                                                    <h6 class="mb-0 text-">
                                                         <?php echo $rows['O_district']; ?>
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <h6 class="mb-0 text-xs">
-                                                        <a href="edit_office.php?O_id=<?=$rows['O_id']?>" class="btn-primary">
+                                                    <h6 class="mb-0 text-">
+                                                        <a href="edit_office.php?O_id=<?=$rows['O_id']?>">
                                                             <button class="btn btn-primary btn-sm">Edit</button>
                                                         </a> <br>
                                                         <a href="delete_office.php?O_id=<?=$rows['O_id']?>">

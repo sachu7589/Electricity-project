@@ -188,7 +188,7 @@ setTimeout(function(){ window.location = 'manage_office.php'; }, 2000);
                         <div class="form-group first">
                           <label>Email</label>
                           <input type="email" class="form-control" id="email" name="email" onblur="validateEmail()"
-                            oninput="validateEmail()">
+                           onkeyup="validateEmail1()" oninput="validateEmail()">
                           <label class="error" id="eremail"></label>
                           <label class="err" id="errorMessage" style="font-size: small; color: red;"></label>
                         </div>
@@ -198,8 +198,9 @@ setTimeout(function(){ window.location = 'manage_office.php'; }, 2000);
                       <div class="col-md-6">
                         <div class="form-group first">
                           <label>Area </label>
-                          <input type="text" class="form-control" id="area" name="area" onblur="validateArea()" oninput="validateArea()">
+                          <input type="text" class="form-control" id="area" name="area" onblur="validateArea()" oninput="validateArea()" onkeyup="validateArea1()">
                           <label class="error" id="erarea"></label>
+                          <label class="error" id="errorMessage1"></label>
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -534,6 +535,35 @@ function validateDistrict() {
     return false; // No district selected
   }
 }
+function validateEmail1() {
+        var email = document.getElementById('email').value;
+        var errorMessage = document.getElementById('errorMessage');
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = xhr.responseText;
+            errorMessage.innerHTML = response;
+          }
+        };
+        xhr.open('GET', 'validate_email_office.php?email=' + email , true);
+        xhr.send();
+      }
+
+      function validateArea1() {
+        var email = document.getElementById('area').value;
+        var errorMessage = document.getElementById('errorMessage1');
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = xhr.responseText;
+            errorMessage.innerHTML = response;
+          }
+        };
+        xhr.open('GET', 'validate_area.php?email=' + email , true);
+        xhr.send();
+      }
 
 
 

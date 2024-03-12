@@ -2,7 +2,7 @@
 if(isset($_POST['submit'])){
   $username=$_POST['username'];
   $password=md5($_POST['password']);
-  $sql="SELECT L_id,L_type_id,L_status FROM tbl_login WHERE  L_uname='$username' AND L_pass='$password'";
+  $sql="SELECT L_id,L_type_id,L_status FROM tbl_login WHERE  L_uname='$username' AND L_pass='$password' AND L_status=1";
   require_once "connect.php";
   $result=$conn->query($sql);
   if($result->num_rows>0){
@@ -16,10 +16,56 @@ if(isset($_POST['submit'])){
       if($L_type_id==1){
         header("Location: dashboard.php");
       }else if($L_type_id==2){
-        header("Location: index.html");
+        $sql="SELECT C_Lid,C_status FROM tbl_consumers WHERE C_Lid=$L_id;";
+        $result=$conn->query($sql);
+        if($result->num_rows>0){
+          $row= $result->fetch_assoc();
+          $C_status=$row['C_status'];
+          if($C_status=="pending"){
+            ?>
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+              </head>
+              <body>
+                
+              </body>
+              <script>
+                Swal.fire({
+  icon: "info",
+  title: "Pending",
+  text: "Your application is under processing..!",
+});
+              </script>
+              </html>
+            <?php
+          }
+          if($C_status=="approved"){
+            echo "your request is approved";
+          }
+          if($C_status=="rejected"){
+            echo "your request is rejected";
+          }
+        }else{
+          header("Location: con_register.php");
+        }
       }
       else if($L_type_id==3){
-        header("Location: index.html");
+        $sql="SELECT E_level FROM tbl_employees WHERE E_L_id=$L_id;";
+        $result=$conn->query($sql);
+        $rows=$result->fetch_assoc();
+        $E_level=$rows['E_level'];
+        $_SESSION['E_level']=$E_level;
+        if($E_level=="manager"){
+          header("Location: manager.php");
+        }
+        if($E_level=="meter reader"){
+          header("Location: meter.php");
+        }
       }
     }
     else{
@@ -338,19 +384,18 @@ h2 {
                   <label>Email</label>
                   <input type="text" class="form-control"  id="username" name="username">
                 </div>
-                <div class="form-group last mb-3">
+                <div class="form-group last ">
                   <label>Password</label>
                   <input type="password" class="form-control"  id="password" name="password" onblur="validatePassword()" oninput="validatePassword()">
                   <label class="error" id="erpassword"></label>
                 </div>
-                
-                <div class="d-sm-flex mb-5 align-items-center">
-                  <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Not a consumer <a href="register.html">New connection</a></span>
+                <div class="d-flex justify-content-center mb-3">
+    <input type="submit" name="submit" value="Login" class="btn btn-primary btn-sm">
+</div>
+                <div class="d-sm-flex  align-items-center">
+                  <label class="control control--checkbox  mb-sm-0"><span class="caption">Not a consumer <a href="email_val.php">Create an account</a></span>
                   </label>
                 </div>
-
-                <input type="submit" name="submit" value="Login" class="btn btn-primary" >
-
               </form>
             </div>
           </div>
@@ -372,7 +417,7 @@ h2 {
   var erpassword = document.getElementById('erpassword');
   
   // Define password strength criteria
-  var minLength = 8;
+  var minLength = 6;
   var hasUpperCase = /[A-Z]/.test(password);
   var hasLowerCase = /[a-z]/.test(password);
   var hasNumber = /\d/.test(password);
