@@ -51,15 +51,14 @@ if ($result && $result->num_rows > 0) {
             <?php } ?>
             <p>
             <?php
-                if($row['C_status']=="pending"){
-                    ?>
-                        <a href="" class="btn btn-success">Approve</a>
-                        <a href="" class="btn btn-warning" style="margin-left: 20px;">Resubmit</a>
-                        <a href="" class="btn btn-danger" style="margin-left: 20px;">Reject</a>
-
-                    <?php
-                }
-            ?>
+if ($row['C_status'] == "pending") {
+    ?>
+    <a href="action_approve.php?id=<?php echo $row['C_id']; ?>&action=approve" class="btn btn-success">Approve</a>
+    <a href="action_approve.php?id=<?php echo $row['C_id']; ?>&action=resubmit" class="btn btn-warning" style="margin-left: 20px;">Resubmit</a>
+    <a href="action_approve.php?id=<?php echo $row['C_id']; ?>&action=reject" class="btn btn-danger" style="margin-left: 20px;">Reject</a>
+    <?php
+}
+?>
             </p>
         </div>
     </div>

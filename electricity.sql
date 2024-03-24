@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2024 at 05:11 PM
+-- Generation Time: Mar 19, 2024 at 02:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -39,37 +39,45 @@ CREATE TABLE `tbl_allocate` (
 --
 
 INSERT INTO `tbl_allocate` (`Alloc_id`, `Alloc_officeid`, `Alloc_manager`, `Alloc_meter`) VALUES
-(1, 17, 0, 0),
-(2, 18, 23, 26),
-(3, 19, 0, 0);
+(4, 20, 29, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_connection`
+-- Table structure for table `tbl_consumers`
 --
 
-CREATE TABLE `tbl_connection` (
-  `Con_id` int(11) NOT NULL,
-  `Con_request_date` date NOT NULL DEFAULT current_timestamp(),
-  `Con_approval_date` date NOT NULL,
-  `Con_conn_type` varchar(50) NOT NULL,
-  `Con_proof` blob NOT NULL,
-  `Con_L_id` int(11) NOT NULL,
-  `Con_status` varchar(50) NOT NULL DEFAULT 'pending',
-  `Con_off_id` int(11) NOT NULL,
-  `Con_det_id` int(11) NOT NULL,
-  `Con_name` varchar(50) NOT NULL,
-  `Con_email` varchar(50) NOT NULL
+CREATE TABLE `tbl_consumers` (
+  `C_id` int(11) NOT NULL,
+  `C_fname` varchar(50) NOT NULL,
+  `C_lname` varchar(50) NOT NULL,
+  `C_phne` varchar(15) NOT NULL,
+  `C_so` varchar(50) NOT NULL,
+  `C_postal` double NOT NULL,
+  `C_house` varchar(50) NOT NULL,
+  `C_street` varchar(50) NOT NULL,
+  `C_city` varchar(50) NOT NULL,
+  `C_houseno` varchar(10) NOT NULL,
+  `C_district` varchar(50) NOT NULL,
+  `C_area` varchar(50) NOT NULL,
+  `C_con_type` varchar(50) NOT NULL,
+  `C_proof_id` blob NOT NULL,
+  `C_building` blob NOT NULL,
+  `C_status` varchar(50) NOT NULL DEFAULT 'pending',
+  `C_req_date` date NOT NULL DEFAULT current_timestamp(),
+  `C_approve_date` date NOT NULL,
+  `C_Lid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_connection`
+-- Dumping data for table `tbl_consumers`
 --
 
-INSERT INTO `tbl_connection` (`Con_id`, `Con_request_date`, `Con_approval_date`, `Con_conn_type`, `Con_proof`, `Con_L_id`, `Con_status`, `Con_off_id`, `Con_det_id`, `Con_name`, `Con_email`) VALUES
-(28, '2024-02-07', '0000-00-00', '', '', 31, 'pending', 0, 0, '', 'subin192@gmail.com'),
-(29, '2024-02-07', '0000-00-00', '', '', 32, 'pending', 0, 0, '', 'admin@gmai');
+INSERT INTO `tbl_consumers` (`C_id`, `C_fname`, `C_lname`, `C_phne`, `C_so`, `C_postal`, `C_house`, `C_street`, `C_city`, `C_houseno`, `C_district`, `C_area`, `C_con_type`, `C_proof_id`, `C_building`, `C_status`, `C_req_date`, `C_approve_date`, `C_Lid`) VALUES
+(8, 'Eapen', 'Thomas', '9961245367', 'qwerty', 654411, 'villunni', 'pettakavala', 'vandiperiyar', '111', 'Kottayam', 'koovapally', 'Commercial Connection', 0x646f63756d656e74732f616e737765722e706466, 0x646f63756d656e74732f616e737765722e70646620, 'approved', '2024-03-01', '0000-00-00', 75),
+(10, 'sachu', 'saji', '7902486166', 'qwerty', 685544, 'aaaaaaaaa', 'pettakavala', 'kanjirapally', '111', 'Kottayam', 'koovapally', 'Domestic Connection', 0x646f63756d656e74732f41737369676e6d656e742e706466, 0x646f63756d656e74732f6d6f6420312e706466, 'pending', '2024-03-03', '0000-00-00', 81),
+(11, 'sachu', 'saji', '9540036728', 'qwerty', 685544, 'villunni', 'pettakavala', 'vandiperiyar', '111', 'Kottayam', 'koovapally', 'Domestic Connection', 0x646f63756d656e74732f41737369676e6d656e742e706466, 0x646f63756d656e74732f6d6f6420322e706466, 'approved', '2024-03-04', '0000-00-00', 82),
+(12, 'sachu', 'saji', '9961245367', 'qwerty', 685544, 'villunni', 'pettakavala', 'kanjirapally', '111', 'Kottayam', 'koovapally', 'Domestic Connection', 0x646f63756d656e74732f41737369676e6d656e742e706466, 0x646f63756d656e74732f6d6f6420312e706466, 'pending', '2024-03-07', '0000-00-00', 83);
 
 -- --------------------------------------------------------
 
@@ -86,6 +94,7 @@ CREATE TABLE `tbl_employees` (
   `E_so` varchar(30) NOT NULL,
   `E_postal` double NOT NULL,
   `E_house` varchar(100) NOT NULL,
+  `E_level` varchar(50) NOT NULL,
   `E_street` varchar(50) NOT NULL,
   `E_city` varchar(30) NOT NULL,
   `E_dob` date NOT NULL,
@@ -98,10 +107,9 @@ CREATE TABLE `tbl_employees` (
 -- Dumping data for table `tbl_employees`
 --
 
-INSERT INTO `tbl_employees` (`E_id`, `E_fname`, `E_lname`, `E_phne`, `E_email`, `E_so`, `E_postal`, `E_house`, `E_street`, `E_city`, `E_dob`, `E_district`, `E_L_id`, `E_status`) VALUES
-(23, 'sachu', 'saji', '9961245367', 'subin192@gmail.com', 'qwerty', 685544, 'villunni', 'vandiperiyar', 'chalukunnel', '2006-01-30', 'Alappuzha', 56, 1),
-(26, 'felix', 'thomas', '9961245367', 'subin192@gmail.com', 'qwerty', 685522, 'villunni', 'vandiperiyar', 'pettakavala', '2006-02-05', 'Kottayam', 59, 1),
-(27, 'subin', 'santhosh', '7902486166', 'sachus7589@gmail.com', 'qwerty', 685544, 'villunni', 'vandiperiyar', 'chenappaddy', '2006-01-30', 'Alappuzha', 60, 1);
+INSERT INTO `tbl_employees` (`E_id`, `E_fname`, `E_lname`, `E_phne`, `E_email`, `E_so`, `E_postal`, `E_house`, `E_level`, `E_street`, `E_city`, `E_dob`, `E_district`, `E_L_id`, `E_status`) VALUES
+(29, 'sachu', 'saji', '7902486166', 'sachus7589@gmail.com', 'qwerty', 685544, 'villunni', 'manager', 'vandiperiyar', 'pettakavala', '2006-02-07', 'Kottayam', 62, 1),
+(30, 'subin', 'santhosh', '9961245367', 'sachu7589@gmail.com', 'qwerty', 748512, 'villunni', 'meter reader', 'vandiperiyar', 'ponkunnam', '2006-02-07', 'Alappuzha', 63, 1);
 
 -- --------------------------------------------------------
 
@@ -123,9 +131,11 @@ CREATE TABLE `tbl_login` (
 
 INSERT INTO `tbl_login` (`L_id`, `L_uname`, `L_pass`, `L_type_id`, `L_status`) VALUES
 (30, 'admin@gmail.com', '0e7517141fb53f21ee439b355b5a1d0a', 1, 1),
-(56, 'subin192@gmail.com', 'cc588ae7b05800143b3817455b128bc7', 3, 1),
-(59, 'abyjoy2@gmail.com', 'b092aac417d9a3851d52df2b2e512738', 3, 1),
-(61, 'sachus7589@gmail.com', 'a13d36739e0d6a7b86e89903d22c04f4', 3, 0);
+(62, 'sachus7589@gmail.com', '9515f471dd8b1224ea66a933d45d5740', 3, 1),
+(63, 'sachu7589@gmail.com', '1fb99cdf3b92c8e70ec30cadac502795', 3, 1),
+(75, 'eapentkadamapuzha@gmail.com', '1852bc7f0f362b8829943acfe88cd45e', 2, 1),
+(82, 'aromalgirish00@gmail.com', 'bc8b85235f862c4c3c97a78580692bcc', 2, 1),
+(83, 'sachus7589@gmail.com', 'c14e5dd0c6a2be60b3485fd4adc3da59', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -151,9 +161,7 @@ CREATE TABLE `tbl_offices` (
 --
 
 INSERT INTO `tbl_offices` (`O_id`, `O_phone`, `O_email`, `O_area`, `O_postal`, `O_street`, `O_city`, `O_landmark`, `O_district`, `O_status`) VALUES
-(17, '9540036728', 'login@gmail.com', 'chenappaddy', 685544, 'pettakavala', 'vandiperiyar', 'near perumpatty', 'Palakkad', 0),
-(18, '9540036728', 'login@gmail.com', 'chenappaddy', 685522, 'ponkunnam', 'vandiperiyar', 'near perumpatty', 'Idukki', 1),
-(19, '7902486165', 'abc@gmail.com', 'koovapally', 654477, 'chalukunnel', 'kottayam', 'near chenappady schooll', 'Ernakulam', 1);
+(20, '9961245367', 'login@gmail.com', 'koovapally', 784573, 'pettakavala', 'vandiperiyar', 'near perumpatty', 'Kottayam', 1);
 
 -- --------------------------------------------------------
 
@@ -186,10 +194,10 @@ ALTER TABLE `tbl_allocate`
   ADD PRIMARY KEY (`Alloc_id`);
 
 --
--- Indexes for table `tbl_connection`
+-- Indexes for table `tbl_consumers`
 --
-ALTER TABLE `tbl_connection`
-  ADD PRIMARY KEY (`Con_id`);
+ALTER TABLE `tbl_consumers`
+  ADD PRIMARY KEY (`C_id`);
 
 --
 -- Indexes for table `tbl_employees`
@@ -223,31 +231,31 @@ ALTER TABLE `tbl_user_types`
 -- AUTO_INCREMENT for table `tbl_allocate`
 --
 ALTER TABLE `tbl_allocate`
-  MODIFY `Alloc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Alloc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tbl_connection`
+-- AUTO_INCREMENT for table `tbl_consumers`
 --
-ALTER TABLE `tbl_connection`
-  MODIFY `Con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+ALTER TABLE `tbl_consumers`
+  MODIFY `C_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_employees`
 --
 ALTER TABLE `tbl_employees`
-  MODIFY `E_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `E_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `L_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `L_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `tbl_offices`
 --
 ALTER TABLE `tbl_offices`
-  MODIFY `O_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `O_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_types`
